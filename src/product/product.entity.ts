@@ -1,3 +1,4 @@
+import { ServicioEntity } from "src/servicio/servicio.entity";
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'productos'})
@@ -12,6 +13,6 @@ export class ProductEntity {
     @Column({type: 'varchar', width:255, nullable: true})
     descripcion: string;
 
-    @Column({type: 'float', nullable: false})
-    precio: number;
+    @ManyToMany(type=> ServicioEntity, servicio=> servicio.productos, {eager: true})
+    servicios: ServicioEntity[];
 }

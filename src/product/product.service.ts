@@ -38,7 +38,7 @@ export class ProductService {
         if(exists) throw new BadRequestException(new MessageDto('El nombre ya existe'))
         const producto = this.productoRepository.create(dto);
         await this.productoRepository.save(producto);
-        return new MessageDto(`Ruta ${producto.nombre} creado`);
+        return new MessageDto(`Ruta ${producto.nombre} creada`);
     }
 
     async update(id: number, dto: ProductoDto): Promise<any> {
@@ -47,14 +47,13 @@ export class ProductService {
         const exists = await this.findByNombre(dto.nombre);
         if(exists && exists.id !== id) throw new BadRequestException({message: 'El nombre ya existe'})
         dto.nombre? producto.nombre = dto.nombre : producto.nombre = producto.nombre;
-        dto.precio? producto.precio = dto.precio : producto.precio = producto.precio;
         await this.productoRepository.save(producto);
-        return new MessageDto(`Ruta ${producto.nombre} actualizado`);
+        return new MessageDto(`Ruta ${producto.nombre} actualizada`);
     }
 
     async delete(id: number): Promise<any> {
         const producto = await this.findById(id);
         await this.productoRepository.delete(producto);
-        return new MessageDto(`Ruta ${producto.nombre} eliminado`);
+        return new MessageDto(`Ruta ${producto.nombre} eliminada`);
     }
 }

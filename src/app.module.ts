@@ -7,6 +7,8 @@ import { DB_DATABASE, DB_HOST, DB_PORT, DB_PWD, DB_USER } from './config/constan
 import { ProductModule } from './product/product.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { RolModule } from './rol/rol.module';
+import { ServicioModule } from './servicio/servicio.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,14 +26,16 @@ import { RolModule } from './rol/rol.module';
         password: configService.get<string>(DB_PWD),
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
+        synchronize: false,
         logging: true
       }),
       inject: [ConfigService]
     }),
     ProductModule,
+    ServicioModule,
     UsuarioModule,
     RolModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
