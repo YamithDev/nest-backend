@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DB_DATABASE, DB_HOST, DB_PORT, DB_PWD, DB_USER } from './config/constants';
 import { ProductModule } from './product/product.module';
+import { UsuarioModule } from './usuario/usuario.module';
+import { RolModule } from './rol/rol.module';
 
 @Module({
   imports: [
@@ -22,12 +24,14 @@ import { ProductModule } from './product/product.module';
         password: configService.get<string>(DB_PWD),
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: false,
+        synchronize: true,
         logging: true
       }),
       inject: [ConfigService]
     }),
-    ProductModule
+    ProductModule,
+    UsuarioModule,
+    RolModule,
   ],
   controllers: [AppController],
   providers: [AppService],

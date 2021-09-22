@@ -7,6 +7,8 @@ export class ProductoDto {
     @IsNotBlank({message: 'El nombre no debe estar vacío'})
     nombre?: string;
 
+    descripcion?:string;
+
     @IsNumber()    
     @IsNotEmpty()
     @Min(10)
