@@ -16,6 +16,7 @@ import { UsuarioEntity } from 'src/usuario/usuario.entity';
 import { AuthRepository } from './auth.repository';
 import { LoginUsuarioDto } from './dto/login.dto';
 import { NuevoUsuarioDto } from './dto/nuevo-usuario.dto';
+import { TokenDto } from './dto/token.dto';
 import { PayloadInterface } from './payload.interface';
 
 @Injectable()
@@ -79,6 +80,18 @@ export class AuthService {
     };
     const token = await this.jwtService.sign(payload);
 
+    return { token };
+  }
+
+  async refresh(dto: TokenDto): Promise<any> {
+    const usuario = await this.jwtService.decode(dto.token);
+    const payload: PayloadInterface = {
+      id: usuario['id'],
+      nombreUsuario: usuario['nombreUsuario'],
+      email: usuario['email'],
+      roles: usuario['roles'],
+    };
+    const token = await this.jwtService.sign(payload);
     return { token };
   }
 }
