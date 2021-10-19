@@ -11,7 +11,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { RolDecorator } from 'src/decorators/rol.decorator';
+import { RolDecorator } from 'src/decorators/rol.decorator';  
 import { JwtAuthGuard } from 'src/guards/jwt.guard';
 import { RolesGuard } from 'src/guards/rol.guard';
 import { RolNombre } from 'src/rol/rol.enum';
@@ -29,7 +29,7 @@ export class ProductController {
     return await this.productoService.getAll();
   }
 
-  @RolDecorator(RolNombre.ADMIN, RolNombre.USER)
+  @RolDecorator(RolNombre.ADMIN)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get(':id')
   async getOne(@Param('id', ParseIntPipe) id: number) {

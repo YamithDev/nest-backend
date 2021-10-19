@@ -1,17 +1,15 @@
-import { IsNotEmpty, IsNumber, IsString, Min } from "class-validator";
-import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
+import { IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
+import { IsNotBlank } from 'src/decorators/is-not-blank.decorator';
 
 export class ServicioDto {
+  @IsNotEmpty()
+  @IsNotBlank({ message: 'El nombre no debe estar vacío' })
+  nombre?: string;
 
-    @IsNotEmpty()
-    @IsNotBlank({message: 'El nombre no debe estar vacío'})
-    nombre?: string;
+  @IsString()
+  descripcion?: string;
 
-    @IsString()
-    descripcion?:string;
-
-    @IsNumber()    
-    @IsNotEmpty()
-    @Min(10)
-    precio?: number;
+  @IsNumber()
+  @IsNotEmpty()
+  precio?: number;
 }
